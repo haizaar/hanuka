@@ -32,6 +32,7 @@ def create_server(app: FastAPI, s: Settings) -> uvicorn.Server:
 
 
 async def _main(s: Settings) -> None:
+
     async with AsyncExitStack() as estack:
         await b.bind(s, estack)
         app = create_app()
@@ -50,6 +51,7 @@ def main(verbose: bool):
     """
     settings = Settings()
     root_level = logging.DEBUG if verbose else logging.INFO
-    uberlogging.configure(root_level=root_level)
+
+    uberlogging.configure(root_level=root_level, contextvars=(b.rid,))
 
     asyncio.run(_main(settings))

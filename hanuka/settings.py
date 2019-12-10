@@ -5,6 +5,8 @@ env_prefix = "HANUKA"
 
 
 class ServerSettings(BaseSettings):
+    rid_bits: int = 48
+    rid_header: str = "X-Request-ID"
     port: int = 8000
 
     class Config:

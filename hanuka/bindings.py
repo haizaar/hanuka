@@ -1,10 +1,12 @@
 from contextlib import AsyncExitStack
+from contextvars import ContextVar
 from dataclasses import dataclass
 
 from .candle_db import CandleDb
 from .settings import Settings
 
 settings: Settings = None
+rid: ContextVar = ContextVar("rid")
 
 
 @dataclass
